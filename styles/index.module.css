@@ -1,71 +1,67 @@
 .content {
-    display: flex;
-    
-  }
-  
-  .settings {
-    width: 45%;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-family: "Poppins", sans-serif;
-    font-weight: 300;
-  }
-  .elements{
-  font-family: inherit;
-  width: 100%;
-  border: 0;
-  border-bottom: 2px solid gray ;
-  outline: 0;
-  font-size: 1.3rem;
-  color:black;
-  padding: 7px 0;
-  background: transparent;
-  }
- .button
-{
-  font-family: inherit;
-  width: 40%;
-  border: 0;
-  border: 2px solid gray ;
-  border-radius: 7px;
-  outline: 0;
-  font-size: 1.3rem;
-  color:black;
-  padding: 7px 0;
-  background:transparent;
-  
-  
-}  
-  .banner {
-    width: 55%;
-    align-self: center;
+	display: flex;
+}
 
-    margin-top:100px;
-    padding: 70px;
-  }
-  
-  @media (max-width: 800px) {
-    .content {
-      flex-direction: column-reverse;
-      align-items: center;
-    }
-    .banner { 
-      width: 85%;
-      padding: 0;
-      padding-top: 20px;
-    }
-    .settings {
-      width: 100%;
-    }
-  }
-  
-  .settings__select {
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    width: 100%;
-    flex: 0.8;
-    justify-content: space-evenly;
-  }
+.settings {
+	width: 45%;
+	padding: 10px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	font-family: "Poppins", sans-serif;
+	font-weight: 300;
+}
+.elements {
+	font-family: inherit;
+	width: 100%;
+	border: 0;
+	border-bottom: 2px solid gray;
+	outline: 0;
+	font-size: 1.3rem;
+	color: black;
+	padding: 7px 0;
+	background: transparent;
+}
+.button {
+	font-family: inherit;
+	width: 40%;
+	border: 0;
+	border: 2px solid gray;
+	border-radius: 7px;
+	outline: 0;
+	font-size: 1.3rem;
+	color: black;
+	padding: 7px 0;
+	background: transparent;
+}
+.banner {
+	width: 55%;
+	align-self: center;
+
+	margin-top: 100px;
+	padding: 70px;
+}
+
+@media (max-width: 800px) {
+	.content {
+		flex-direction: column-reverse;
+		align-items: center;
+	}
+	.banner {
+		width: 85%;
+		padding: 0;
+		padding-top: 20px;
+	}
+	.settings {
+		width: 100%;
+	}
+}
+
+.settings__select {
+	display: flex;
+	flex-direction: column;
+	padding: 20px;
+	width: 100%;
+	flex: 0.8;
+	justify-content: space-evenly;
+}
