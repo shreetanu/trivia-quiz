@@ -11,17 +11,17 @@ const QuizPage = () => {
   const router = useRouter();
 
   useEffect(async () => {
-    const { data } = await axios.get(router.query.api);
+    const { data } = await axios.get(router.query.link);
     setQuestion(data.results);
     console.log(questions);
     setOptions(
-      questions &&
+      questions.length &&
         handleShuffle([
           questions[currQuestion]?.correct_answer,
           ...questions[currQuestion]?.incorrect_answers,
         ])
     );
-  }, [questions]);
+  }, [questions,options]);
 
   //console.log(questions);
 
@@ -33,10 +33,11 @@ const QuizPage = () => {
     <div className={classes.quiz}>
       <h2 className={classes.title}>Welcome Mohit!</h2>
 
-      {questions ? (
+      {questions.length !== 0 ? (
         <Fragment>
+
           <div className={classes.info}>
-            <div>{questions[currQuestion].category}</div>
+            <div>Quizs</div>
             <div>Score : 100</div>
           </div>
           {/* (question component) <Question

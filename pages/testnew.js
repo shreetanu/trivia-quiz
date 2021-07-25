@@ -7,7 +7,7 @@ function testnew() {
 
     const router = useRouter();
     return (
-        <h1>{router.query.api}</h1>
+        <h1>{router.query.link}</h1>
     )
 }
 

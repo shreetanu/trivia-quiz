@@ -4,6 +4,7 @@ import ErrorMessage from '../components/ErrorMessage';
 import Head from 'next/head'
 import classes from '../styles/index.module.css'
 import Header from '../components/Header'
+import { Link } from 'react-router-dom';
 function HomePage() {
   const [name, setName] = useState('');
   const [difficulty, setDifficulty] = useState("");
@@ -26,10 +27,10 @@ function HomePage() {
     } else {
       setError(false);
       //for test 
-      api = 'https://opentdb.com/api.php?amount=15&category=18&difficulty=' + difficulty;
+      api = 'https://opentdb.com/api.php?amount=15&category=18&difficulty=' + difficulty+'&type=multiple';
       router.push({
-        pathname: '/testnew',
-        query: { api: api }
+        pathname: '/quiz',
+        query: { link: api }
       })
 
     }
@@ -62,8 +63,9 @@ function HomePage() {
             <option key="Hard" value="hard">Hard</option>
 
           </select>
-
-          <button className={classes.button} onClick={handleSubmit}>Start Quiz</button>
+            
+          <button   className={classes.button} onClick={handleSubmit}>Start Quiz</button>
+         
         </div>
       </div>
       <img src='/quiz.svg' className={classes.banner}></img>
