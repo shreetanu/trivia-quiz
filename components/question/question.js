@@ -1,3 +1,4 @@
+import router from "next/router";
 import React, { useState } from "react";
 import styles from "./question.module.css";
 
@@ -7,7 +8,6 @@ function Question({
 	questions,
 	options,
 	correct,
-	setScore,
 	setQuestions,
 }) {
 	const [selected, setSelected] = useState("");
@@ -21,7 +21,7 @@ function Question({
 
 	const handleCheck = i => {
 		setSelected(i);
-		if (i === correct) setScore(score + 1);
+		// if (i === correct) setScore(score + 1);
 		setError(false);
 	};
 
@@ -34,28 +34,33 @@ function Question({
 	};
 
 	const handleQuit = () => {
-		setCurrQues(0);
-		setQuestions();
+		router.push("/");
 	};
+
+	// console.log(options);
 	return (
 		<div className={styles.question}>
 			<h1>Question {currQues + 1}</h1>
 			<div className={styles.singleQuestion}>
 				<h2>{questions[currQues].question}</h2>
-				<div className={styles.options}>
-					{error && <p>{error}</p>}
-					{options &&
-						options.map(i => {
-							<button
-								className={`${styles.singleOption}  ${selected && styles[handleSelect(i)]}`}
-								key={i}
-								onClick={() => handleCheck(i)}
-								disabled={selected}>
-								{i}
-							</button>;
-						})}
+				<div className={styles.optionsWrapper}>
+					{error && <p className={styles.error}>{error}</p>}
+					<div className={styles.options}>
+						{options &&
+							options.map(option => (
+								<button
+									className={`${styles.singleOption}  ${
+										selected && styles[handleSelect(option)]
+									}`}
+									key={option}
+									onClick={() => handleCheck(option)}
+									disabled={selected}>
+									{option}
+								</button>
+							))}
+					</div>
 				</div>
-				<div className={styles.control}>
+				<div className={styles.controls}>
 					<button onClick={handleQuit}>Quit</button>
 					<button onClick={handleNext}>
 						{currQues > 20 ? "Submit" : "Next Question"}

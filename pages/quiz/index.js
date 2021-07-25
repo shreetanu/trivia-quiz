@@ -1,15 +1,17 @@
 import axios from "axios";
 import { Fragment, useState, useEffect } from "react";
 import classes from "../../styles/quiz.module.css";
+import Question from "../../components/question/question";
 import { useRouter } from "next/router";
 
 const QuizPage = () => {
 	const [options, setOptions] = useState();
 	const [currQuestion, setCurrQuestion] = useState(0);
-	const [questions, setQuestion] = useState([]);
+	const [questions, setQuestions] = useState([]);
 
 	const router = useRouter();
 	const { type } = router.query;
+
 	useEffect(() => {
 		const api =
 			"https://opentdb.com/api.php?amount=15&category=18&difficulty=" +
@@ -17,18 +19,21 @@ const QuizPage = () => {
 			"&type=multiple";
 		const fetchData = async () => {
 			const { data } = await axios.get(api);
-			setQuestion(data.results);
-			console.log(questions);
-			setOptions(
-				questions.length &&
-					handleShuffle([
-						questions[currQuestion]?.correct_answer,
-						...questions[currQuestion]?.incorrect_answers,
-					])
-			);
+			setQuestions(data.results);
+			// console.log(questions);
 		};
 		fetchData();
-	}, [questions, options, type, currQuestion]);
+	}, [type]);
+
+	useEffect(() => {
+		setOptions(
+			questions.length &&
+				handleShuffle([
+					questions[currQuestion]?.correct_answer,
+					...questions[currQuestion]?.incorrect_answers,
+				])
+		);
+	}, [questions, currQuestion]);
 
 	// console.log(questions);
 
@@ -43,17 +48,17 @@ const QuizPage = () => {
 			{questions.length !== 0 ? (
 				<Fragment>
 					<div className={classes.info}>
-						<div>Quizs</div>
+						<div>Quiz</div>
 						<div>Score : 100</div>
 					</div>
-					{/* <Question
-            currQues={currQuestion}
-            setCurrQues={setCurrQues}
-            questions={questions}
-            options={options}
-            correct={questions[currQues]?.correct_answer}
-            setQuestions={setQuestions}
-          /> */}
+					<Question
+						currQues={currQuestion}
+						setCurrQues={setCurrQuestion}
+						questions={questions}
+						options={options}
+						correct={questions[currQuestion]?.correct_answer}
+						setQuestions={setQuestions}
+					/>
 				</Fragment>
 			) : (
 				<div>Loading!!!</div>
