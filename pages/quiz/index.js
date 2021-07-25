@@ -30,7 +30,7 @@ const QuizPage = () => {
 		fetchData();
 	}, [questions, options, type, currQuestion]);
 
-	//console.log(questions);
+	// console.log(questions);
 
 	const handleShuffle = choices => {
 		return choices.sort(() => Math.random() - 0.5);
@@ -46,7 +46,7 @@ const QuizPage = () => {
 						<div>Quizs</div>
 						<div>Score : 100</div>
 					</div>
-					{/* (question component) <Question
+					{/* <Question
             currQues={currQuestion}
             setCurrQues={setCurrQues}
             questions={questions}
