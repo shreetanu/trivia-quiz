@@ -26,13 +26,9 @@ function HomePage() {
 		} else {
 			setError(false);
 			//for test
-			api =
-				"https://opentdb.com/api.php?amount=15&category=18&difficulty=" +
-				difficulty +
-				"&type=multiple";
 			router.push({
 				pathname: "/quiz",
-				query: { link: api },
+				query: { type: difficulty },
 			});
 		}
 	};
