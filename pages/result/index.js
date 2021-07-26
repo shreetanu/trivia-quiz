@@ -9,13 +9,13 @@ const ResultPage = () => {
   if (process.browser){
 		if(ctx.userName.length === 0)
 		{
-			//router.push('/')
+			router.push('/')
 		}
 		}
   return (
     <div className={classes.result}>
       <h2 className="title">Your final score is : {ctx.score}</h2>
-      <Link passhref="/">
+      <Link href="/" passHref={true}>
         <button className={classes.button}>Start Again</button>
       </Link>
     </div>
