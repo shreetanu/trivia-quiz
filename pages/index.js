@@ -13,7 +13,7 @@ function HomePage() {
 
 	useEffect(() => {
 		ctx.resetDetails();
-	}, [])
+	}, [ctx])
 
 	const handleChange = text => {
 		if (text) {
