@@ -4,14 +4,23 @@ import classes from "../../styles/quiz.module.css";
 import Question from "../../components/question/question";
 import { useRouter } from "next/router";
 import QuizContext from "../../store/quiz-context";
-
+import Header from "../../components/Header";
 const QuizPage = () => {
+	
 	const ctx = useContext(QuizContext);
+	
 	const [options, setOptions] = useState();
 	const [currQuestion, setCurrQuestion] = useState(0);
 	const [questions, setQuestions] = useState([]);
 
 	const router = useRouter();
+	if (process.browser){
+		if(ctx.userName.length === 0)
+		{
+			router.push('/')
+		}
+		}
+	
 	const { type } = router.query;
 
 	useEffect(() => {
@@ -44,14 +53,15 @@ const QuizPage = () => {
 	};
 
 	return (
+
 		<div className={classes.quiz}>
 			<h2 className={classes.title}>Welcome {ctx.userName}!</h2>
 
 			{questions.length !== 0 ? (
 				<Fragment>
 					<div className={classes.info}>
-						<div>Quiz</div>
-						<div>Score : {ctx.score}</div>
+						
+						<h3 style={{width:'100%' , textAlign: "center", padding:'0', margin: '0'}}>Score : {ctx.score}</h3>
 					</div>
 					<Question
 						currQues={currQuestion}
