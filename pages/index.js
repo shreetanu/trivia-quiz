@@ -1,26 +1,27 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useRouter } from "next/router";
 import ErrorMessage from "../components/ErrorMessage";
 import classes from "../styles/index.module.css";
 import Header from "../components/Header";
 import Image from "next/image";
+import QuizContext from "../store/quiz-context";
 
 function HomePage() {
-	const [name, setName] = useState("");
+	const ctx = useContext(QuizContext);
 	const [difficulty, setDifficulty] = useState("");
 	const [error, setError] = useState(false);
 
 	const handleChange = text => {
 		if (text) {
-			setName(text);
+			ctx.updateUserName(text);
 		} else {
-			setName("");
+			ctx.updateUserName("");
 		}
 	};
 	const router = useRouter();
 	let api = "";
 	const handleSubmit = () => {
-		if (!difficulty || !name || difficulty === "select") {
+		if (!difficulty || !ctx.userName || difficulty === "select") {
 			setError(true);
 			return;
 		} else {
@@ -44,7 +45,7 @@ function HomePage() {
 						style={{ marginBottom: 25 }}
 						className={classes.elements}
 						id='name'
-						value={name}
+						value={ctx.userName}
 						onChange={event => handleChange(event.target.value)}
 					/>
 

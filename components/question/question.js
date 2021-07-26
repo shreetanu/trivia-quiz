@@ -1,6 +1,7 @@
 import router from "next/router";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styles from "./question.module.css";
+import QuizContext from "../../store/quiz-context";
 
 function Question({
 	currQues,
@@ -10,6 +11,8 @@ function Question({
 	correct,
 	setQuestions,
 }) {
+
+	const ctx = useContext(QuizContext);
 	const [selected, setSelected] = useState("");
 	const [error, setError] = useState("");
 
@@ -21,7 +24,7 @@ function Question({
 
 	const handleCheck = i => {
 		setSelected(i);
-		// if (i === correct) setScore(score + 1);
+		if (i === correct) ctx.updateScore();
 		setError(false);
 	};
 

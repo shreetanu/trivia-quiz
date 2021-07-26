@@ -1,10 +1,12 @@
 import axios from "axios";
-import { Fragment, useState, useEffect } from "react";
+import { Fragment, useState, useEffect, useContext } from "react";
 import classes from "../../styles/quiz.module.css";
 import Question from "../../components/question/question";
 import { useRouter } from "next/router";
+import QuizContext from "../../store/quiz-context";
 
 const QuizPage = () => {
+	const ctx = useContext(QuizContext);
 	const [options, setOptions] = useState();
 	const [currQuestion, setCurrQuestion] = useState(0);
 	const [questions, setQuestions] = useState([]);
@@ -43,13 +45,13 @@ const QuizPage = () => {
 
 	return (
 		<div className={classes.quiz}>
-			<h2 className={classes.title}>Welcome Mohit!</h2>
+			<h2 className={classes.title}>Welcome {ctx.userName}!</h2>
 
 			{questions.length !== 0 ? (
 				<Fragment>
 					<div className={classes.info}>
 						<div>Quiz</div>
-						<div>Score : 100</div>
+						<div>Score : {ctx.score}</div>
 					</div>
 					<Question
 						currQues={currQuestion}
