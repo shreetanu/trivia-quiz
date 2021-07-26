@@ -6,6 +6,7 @@ import Header from "../components/Header";
 import Image from "next/image";
 
 function HomePage() {
+	const [any, setAny] = useState("");
 	const [name, setName] = useState("");
 	const [difficulty, setDifficulty] = useState("");
 	const [error, setError] = useState(false);
