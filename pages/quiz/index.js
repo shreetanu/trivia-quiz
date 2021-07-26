@@ -17,7 +17,7 @@ const QuizPage = () => {
 	if (process.browser){
 		if(ctx.userName.length === 0)
 		{
-			router.push('/')
+			router.replace('/')
 		}
 		}
 	
@@ -34,6 +34,10 @@ const QuizPage = () => {
 			// console.log(questions);
 		};
 		fetchData();
+
+		return () => {
+			setQuestions([]);
+		}
 	}, [type]);
 
 	useEffect(() => {

@@ -3,6 +3,14 @@ import React, { useState, useContext } from "react";
 import styles from "./question.module.css";
 import QuizContext from "../../store/quiz-context";
 
+const decoder = (text) => {	
+const parser = new DOMParser();
+const decodedString = parser.parseFromString(`<!doctype html><body>${text}`, 'text/html').body.textContent;
+return decodedString;
+}
+
+
+
 function Question({
 	currQues,
 	setCurrQues,
@@ -45,7 +53,7 @@ function Question({
 		<div className={styles.question}>
 			<h1>Question {currQues + 1}</h1>
 			<div className={styles.singleQuestion}>
-				<h2>{questions[currQues].question}</h2>
+				<h2>{decoder(questions[currQues].question)}</h2>
 				<div className={styles.optionsWrapper}>
 					{error && <p className={styles.error}>{error}</p>}
 					<div className={styles.options}>
@@ -58,7 +66,7 @@ function Question({
 									key={option}
 									onClick={() => handleCheck(option)}
 									disabled={selected}>
-									{option}
+									{decoder(option)}
 								</button>
 							))}
 					</div>
