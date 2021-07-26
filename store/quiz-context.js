@@ -4,7 +4,8 @@ const QuizContext = React.createContext({
     score: 0,
     userName: '',
     updateScore: () => {},
-    updateUserName: (name) => {}
+    updateUserName: (name) => {},
+    resetDetails: () => {}
 });
 
 export const QuizContextProvider = (props) => {
@@ -20,12 +21,18 @@ export const QuizContextProvider = (props) => {
         setUserName(name);
     }
 
+    const resetDetailsHandler = () => {
+        setScore(0);
+        setUserName('');
+    }
+
 
     return <QuizContext.Provider value = {{
     score: score, 
     userName: userName,
     updateScore: updateScoreHandler, 
-    updateUserName: updateUserNameHandler
+    updateUserName: updateUserNameHandler,
+    resetDetails: resetDetailsHandler
 
     }}>
         {props.children}

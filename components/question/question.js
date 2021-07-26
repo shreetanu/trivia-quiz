@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import router from "next/router";
+import React, { useState, useContext } from "react";
 import styles from "./question.module.css";
+import QuizContext from "../../store/quiz-context";
 
 function Question({
 	currQues,
@@ -7,9 +9,10 @@ function Question({
 	questions,
 	options,
 	correct,
-	setScore,
 	setQuestions,
 }) {
+
+	const ctx = useContext(QuizContext);
 	const [selected, setSelected] = useState("");
 	const [error, setError] = useState("");
 
@@ -21,12 +24,12 @@ function Question({
 
 	const handleCheck = i => {
 		setSelected(i);
-		if (i === correct) setScore(score + 1);
+		if (i === correct) ctx.updateScore();
 		setError(false);
 	};
 
 	const handleNext = () => {
-		if (currQues > 8) currQues;
+		if (currQues >= 14) router.push('/result');
 		else if (selected) {
 			setCurrQues(currQues + 1);
 			setSelected();
@@ -34,31 +37,36 @@ function Question({
 	};
 
 	const handleQuit = () => {
-		setCurrQues(0);
-		setQuestions();
+		router.push("/");
 	};
+
+	// console.log(options);
 	return (
 		<div className={styles.question}>
 			<h1>Question {currQues + 1}</h1>
 			<div className={styles.singleQuestion}>
 				<h2>{questions[currQues].question}</h2>
-				<div className={styles.options}>
-					{error && <p>{error}</p>}
-					{options &&
-						options.map(i => {
-							<button
-								className={`${styles.singleOption}  ${selected && styles[handleSelect(i)]}`}
-								key={i}
-								onClick={() => handleCheck(i)}
-								disabled={selected}>
-								{i}
-							</button>;
-						})}
+				<div className={styles.optionsWrapper}>
+					{error && <p className={styles.error}>{error}</p>}
+					<div className={styles.options}>
+						{options &&
+							options.map(option => (
+								<button
+									className={`${styles.singleOption}  ${
+										selected && styles[handleSelect(option)]
+									}`}
+									key={option}
+									onClick={() => handleCheck(option)}
+									disabled={selected}>
+									{option}
+								</button>
+							))}
+					</div>
 				</div>
-				<div className={styles.control}>
+				<div className={styles.controls}>
 					<button onClick={handleQuit}>Quit</button>
 					<button onClick={handleNext}>
-						{currQues > 20 ? "Submit" : "Next Question"}
+						{currQues >= 14 ? "Submit" : "Next Question"}
 					</button>
 				</div>
 			</div>
