@@ -29,7 +29,7 @@ function Question({
 	};
 
 	const handleNext = () => {
-		if (currQues > 8) currQues;
+		if (currQues >= 14) router.push('/result');
 		else if (selected) {
 			setCurrQues(currQues + 1);
 			setSelected();
@@ -66,7 +66,7 @@ function Question({
 				<div className={styles.controls}>
 					<button onClick={handleQuit}>Quit</button>
 					<button onClick={handleNext}>
-						{currQues > 20 ? "Submit" : "Next Question"}
+						{currQues >= 14 ? "Submit" : "Next Question"}
 					</button>
 				</div>
 			</div>

@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { useRouter } from "next/router";
 import ErrorMessage from "../components/ErrorMessage";
 import classes from "../styles/index.module.css";
@@ -10,6 +10,10 @@ function HomePage() {
 	const ctx = useContext(QuizContext);
 	const [difficulty, setDifficulty] = useState("");
 	const [error, setError] = useState(false);
+
+	useEffect(() => {
+		ctx.resetDetails();
+	}, [])
 
 	const handleChange = text => {
 		if (text) {
