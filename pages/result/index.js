@@ -16,7 +16,7 @@ const ResultPage = () => {
     <div className={classes.result}>
       <h2 className="title">Your final score is : {ctx.score}</h2>
       <Link href="/" passHref={true}>
-        <button className={classes.button}>Start Again</button>
+        <button className={classes.button} onClick = {() => ctx.resetDetails()}>Start Again</button>
       </Link>
     </div>
   );

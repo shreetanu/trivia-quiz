@@ -45,6 +45,7 @@ function Question({
 	};
 
 	const handleQuit = () => {
+		ctx.resetDetails();
 		router.push("/");
 	};
 

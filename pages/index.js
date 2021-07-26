@@ -10,10 +10,7 @@ function HomePage() {
 	const ctx = useContext(QuizContext);
 	const [difficulty, setDifficulty] = useState("");
 	const [error, setError] = useState(false);
-
-	useEffect(() => {
-		ctx.resetDetails();
-	}, [ctx])
+	
 
 	const handleChange = text => {
 		if (text) {
@@ -23,7 +20,7 @@ function HomePage() {
 		}
 	};
 	const router = useRouter();
-	let api = "";
+	//let api = "";
 	const handleSubmit = () => {
 		if (!difficulty || !ctx.userName || difficulty === "select") {
 			setError(true);
