@@ -1,0 +1,74 @@
+import router from "next/router";
+import React, { useState } from "react";
+import styles from "./question.module.css";
+
+function Question({
+	currQues,
+	setCurrQues,
+	questions,
+	options,
+	correct,
+	setQuestions,
+}) {
+	const [selected, setSelected] = useState("");
+	const [error, setError] = useState("");
+
+	const handleSelect = i => {
+		if ((selected === i && selected === correct) || i == correct)
+			return "select";
+		else return "wrong";
+	};
+
+	const handleCheck = i => {
+		setSelected(i);
+		// if (i === correct) setScore(score + 1);
+		setError(false);
+	};
+
+	const handleNext = () => {
+		if (currQues > 8) currQues;
+		else if (selected) {
+			setCurrQues(currQues + 1);
+			setSelected();
+		} else setError("Please select a option");
+	};
+
+	const handleQuit = () => {
+		router.push("/");
+	};
+
+	// console.log(options);
+	return (
+		<div className={styles.question}>
+			<h1>Question {currQues + 1}</h1>
+			<div className={styles.singleQuestion}>
+				<h2>{questions[currQues].question}</h2>
+				<div className={styles.optionsWrapper}>
+					{error && <p className={styles.error}>{error}</p>}
+					<div className={styles.options}>
+						{options &&
+							options.map(option => (
+								<button
+									className={`${styles.singleOption}  ${
+										selected && styles[handleSelect(option)]
+									}`}
+									key={option}
+									onClick={() => handleCheck(option)}
+									disabled={selected}>
+									{option}
+								</button>
+							))}
+					</div>
+				</div>
+				<div className={styles.controls}>
+					<button onClick={handleQuit}>Quit</button>
+					<button onClick={handleNext}>
+						{currQues > 20 ? "Submit" : "Next Question"}
+					</button>
+				</div>
+			</div>
+		</div>
+	);
+}
+
+export default Question;
