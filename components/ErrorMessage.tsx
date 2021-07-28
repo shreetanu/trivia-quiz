@@ -1,4 +1,10 @@
-const ErrorMessage = ({ children }) => {
+import {ReactNode} from "react";
+
+interface IErrorMessageProps {
+    children?: ReactNode;
+}
+
+const ErrorMessage = ({children}: IErrorMessageProps) => {
     return (
       <div
         style={{

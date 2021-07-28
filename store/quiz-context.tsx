@@ -1,23 +1,28 @@
-import React, {useState, useCallback} from 'react';
+import React, {useState, ReactNode} from 'react';
 
 const QuizContext = React.createContext({
     score: 0,
     userName: '',
     updateScore: () => {},
-    updateUserName: (name) => {},
+    updateUserName: (name: string) => {},
     resetDetails: () => {}
 });
 
-export const QuizContextProvider = (props) => {
+interface IQuizContextProviderProps {
+    children?: ReactNode;
+}
+
+
+export const QuizContextProvider = (props: IQuizContextProviderProps) => {
     //Quiz Context added
-    const [score, setScore] = useState(0);
-    const [userName, setUserName] = useState('');
+    const [score, setScore] = useState<number>(0);
+    const [userName, setUserName] = useState<string>('');
 
     const updateScoreHandler = () => {
         setScore(score+1)
     }
 
-    const updateUserNameHandler = (name) => {
+    const updateUserNameHandler = (name: string) => {
         setUserName(name);
     }
 
