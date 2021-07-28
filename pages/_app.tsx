@@ -13,9 +13,6 @@ function MyApp({ Component, pageProps }:AppProps) {
 			<ReactQueryDevtools initialIsOpen={false} />
 			</QueryClientProvider>;
 }
-
 export default MyApp;
-
-
 
 
