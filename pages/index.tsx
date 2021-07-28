@@ -12,7 +12,7 @@ function HomePage() {
 	const [error, setError] = useState(false);
 	
 
-	const handleChange = text => {
+	const handleChange = (text: string) => {
 		if (text) {
 			ctx.updateUserName(text);
 		} else {
