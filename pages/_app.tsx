@@ -10,7 +10,6 @@ function MyApp({ Component, pageProps }:AppProps) {
 			<QuizContextProvider>
 				<Component {...pageProps} />
 			</QuizContextProvider>
-			<ReactQueryDevtools initialIsOpen={false} />
 			</QueryClientProvider>;
 }
 export default MyApp;
