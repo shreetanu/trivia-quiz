@@ -4,29 +4,29 @@ import classes from "../../styles/quiz.module.css";
 import Question from "../../components/question/question";
 import { useRouter } from "next/router";
 import QuizContext from "../../store/quiz-context";
-import Header from "../../components/Header";
-import { IQuestion } from "../../services/interface";
-import {useQuery} from "react-query";
-import {getQuestions} from "../../services/trivia";
+import { useQuery } from "react-query";
+import { getQuestions } from "../../services/trivia";
 
 const QuizPage = () => {
-	
 	const ctx = useContext(QuizContext);
 
-	const [options, setOptions] = useState();
+	const [options, setOptions] = useState<string[]>();
 	const [currQuestion, setCurrQuestion] = useState(0);
 
 	const router = useRouter();
-	if (process.browser){
-		if(ctx.userName.length === 0)
-		{
-			router.replace('/')
+	if (process.browser) {
+		if (ctx.userName.length === 0) {
+			router.replace("/");
 		}
-		}
-	
+	}
+
 	const { type } = router.query;
 
-	const {data: questions=[], isLoading, isFetching} = useQuery("questions", ()=>getQuestions(type as string))
+	const {
+		data: questions = [],
+		isLoading,
+		isFetching,
+	} = useQuery("questions", () => getQuestions(type as string));
 
 	useEffect(() => {
 		setOptions(
@@ -40,24 +40,30 @@ const QuizPage = () => {
 
 	// console.log(questions);
 
-	const handleShuffle = (choices :string[]) => {
+	const handleShuffle = (choices: string[]) => {
 		return choices.sort(() => Math.random() - 0.5);
 	};
 
-	if(isLoading){
+	if (isLoading) {
 		return <h4>Loading</h4>;
 	}
 
 	return (
-
 		<div className={classes.quiz}>
 			<h2 className={classes.title}>Welcome {ctx.userName}!</h2>
 
 			{questions.length !== 0 ? (
 				<Fragment>
 					<div className={classes.info}>
-						
-						<h3 style={{width:'100%' , textAlign: "center", padding:'0', margin: '0'}}>Score : {ctx.score}</h3>
+						<h3
+							style={{
+								width: "100%",
+								textAlign: "center",
+								padding: "0",
+								margin: "0",
+							}}>
+							Score : {ctx.score}
+						</h3>
 					</div>
 					<Question
 						currQues={currQuestion}

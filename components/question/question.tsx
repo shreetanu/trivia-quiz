@@ -2,6 +2,7 @@ import router from "next/router";
 import React, { useState, useContext } from "react";
 import styles from "./question.module.css";
 import QuizContext from "../../store/quiz-context";
+import { IQuestion } from "../../services/interface";
 
 const decoder = text => {
 	const parser = new DOMParser();
@@ -12,7 +13,21 @@ const decoder = text => {
 	return decodedString;
 };
 
-function Question({ currQues, setCurrQues, questions, options, correct }) {
+interface IQuestionProps {
+	currQues: number;
+	setCurrQues: (a:number) => void;
+	questions: IQuestion[];
+	options: string[];
+	correct: string;
+}
+
+function Question({
+	currQues,
+	setCurrQues,
+	questions,
+	options,
+	correct,
+}: IQuestionProps) {
 	const ctx = useContext(QuizContext);
 	const [selected, setSelected] = useState("");
 	const [error, setError] = useState("");
