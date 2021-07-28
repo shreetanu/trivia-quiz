@@ -10,9 +10,9 @@ function HomePage() {
 	const ctx = useContext(QuizContext);
 	const [difficulty, setDifficulty] = useState("");
 	const [error, setError] = useState(false);
-	
 
-	const handleChange = (text: string) => {
+
+	const handleChange = (text:string) => {
 		if (text) {
 			ctx.updateUserName(text);
 		} else {

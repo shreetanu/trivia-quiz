@@ -5,13 +5,16 @@ import Question from "../../components/question/question";
 import { useRouter } from "next/router";
 import QuizContext from "../../store/quiz-context";
 import Header from "../../components/Header";
+import { IQuestion } from "../../services/interface";
+import {useQuery} from "react-query";
+import {getQuestions} from "../../services/trivia";
+
 const QuizPage = () => {
 	
 	const ctx = useContext(QuizContext);
-	
+
 	const [options, setOptions] = useState();
 	const [currQuestion, setCurrQuestion] = useState(0);
-	const [questions, setQuestions] = useState([]);
 
 	const router = useRouter();
 	if (process.browser){
@@ -23,38 +26,27 @@ const QuizPage = () => {
 	
 	const { type } = router.query;
 
-	useEffect(() => {
-		const api =
-			"https://opentdb.com/api.php?amount=15&category=18&difficulty=" +
-			type +
-			"&type=multiple";
-		const fetchData = async () => {
-			const { data } = await axios.get(api);
-			setQuestions(data.results);
-			// console.log(questions);
-		};
-		fetchData();
-
-		return () => {
-			setQuestions([]);
-		}
-	}, [type]);
+	const {data: questions=[], isLoading, isFetching} = useQuery("questions", ()=>getQuestions(type as string))
 
 	useEffect(() => {
 		setOptions(
 			questions.length &&
 				handleShuffle([
-					questions[currQuestion]?.correct_answer,
-					...questions[currQuestion]?.incorrect_answers,
+					questions[currQuestion].correct_answer,
+					...questions[currQuestion].incorrect_answers,
 				])
 		);
 	}, [questions, currQuestion]);
 
 	// console.log(questions);
 
-	const handleShuffle = choices => {
+	const handleShuffle = (choices :string[]) => {
 		return choices.sort(() => Math.random() - 0.5);
 	};
+
+	if(isLoading){
+		return <h4>Loading</h4>;
+	}
 
 	return (
 
@@ -73,7 +65,6 @@ const QuizPage = () => {
 						questions={questions}
 						options={options}
 						correct={questions[currQuestion]?.correct_answer}
-						setQuestions={setQuestions}
 					/>
 				</Fragment>
 			) : (

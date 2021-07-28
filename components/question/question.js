@@ -17,7 +17,6 @@ function Question({
 	questions,
 	options,
 	correct,
-	setQuestions,
 }) {
 
 	const ctx = useContext(QuizContext);

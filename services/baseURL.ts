@@ -1,0 +1,1 @@
+export const opentdb =  "https://opentdb.com/api.php?amount=15&category=18&difficulty=";

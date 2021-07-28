@@ -1,14 +1,21 @@
 import "../styles/globals.css";
 import { QuizContextProvider } from "../store/quiz-context";
-import React from "react";
+import {QueryClient, QueryClientProvider} from "react-query";
+import { ReactQueryDevtools } from 'react-query/devtools'
+import type { AppProps} from 'next/app'
+function MyApp({ Component, pageProps }:AppProps) {
 
-interface props{
-	Component :any
-	pageProps: any
-}
-
-function MyApp({ Component, pageProps }:props) {
-	return <QuizContextProvider><Component {...pageProps} /></QuizContextProvider>;
+	const queryClient = new QueryClient();
+	return <QueryClientProvider client={queryClient}>
+			<QuizContextProvider>
+				<Component {...pageProps} />
+			</QuizContextProvider>
+			<ReactQueryDevtools initialIsOpen={false} />
+			</QueryClientProvider>;
 }
 
 export default MyApp;
+
+
+
+
