@@ -1,11 +1,11 @@
 import { useState, useContext } from "react";
 import { useRouter } from "next/router";
 import ErrorMessage from "../components/ErrorMessage";
-import classes from "../styles/index.module.css";
+
 import Header from "../components/Header";
 import Image from "next/image";
 import QuizContext from "../store/quiz-context";
-
+import classes from '../styles/index.module.css'
 function HomePage() {
 	const ctx = useContext(QuizContext);
 	const [difficulty, setDifficulty] = useState("");
@@ -39,7 +39,7 @@ function HomePage() {
 			<div className={classes.settings}>
 				<div className={classes.settings__select}>
 					<Header/>
-					{error && <ErrorMessage>Please Fill all the fields</ErrorMessage>}
+					{error && <ErrorMessage> Please Fill all the fields</ErrorMessage>}
 					<input
 						placeholder='User Name'
 						type='text'
