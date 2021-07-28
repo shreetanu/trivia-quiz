@@ -9,7 +9,7 @@ const QuizContext = React.createContext({
 });
 
 export const QuizContextProvider = (props) => {
-
+    //Quiz Context added
     const [score, setScore] = useState(0);
     const [userName, setUserName] = useState('');
 
