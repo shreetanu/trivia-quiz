@@ -1,14 +1,11 @@
 import "../styles/globals.css";
 import { QuizContextProvider } from "../store/quiz-context";
-import React from "react";
+import type { AppProps} from 'next/app'
 
-interface props{
-	Component :any
-	pageProps: any
-}
 
-function MyApp({ Component, pageProps }:props) {
+function MyApp({ Component, pageProps }:AppProps) {
 	return <QuizContextProvider><Component {...pageProps} /></QuizContextProvider>;
 }
 
 export default MyApp;
+
