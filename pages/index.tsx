@@ -1,18 +1,18 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import { useRouter } from "next/router";
 import ErrorMessage from "../components/ErrorMessage";
-import classes from "../styles/index.module.css";
+
 import Header from "../components/Header";
 import Image from "next/image";
 import QuizContext from "../store/quiz-context";
-
+import classes from '../styles/index.module.css'
 function HomePage() {
 	const ctx = useContext(QuizContext);
 	const [difficulty, setDifficulty] = useState("");
 	const [error, setError] = useState(false);
 	
 
-	const handleChange = text => {
+	const handleChange = (text: string) => {
 		if (text) {
 			ctx.updateUserName(text);
 		} else {
@@ -38,8 +38,8 @@ function HomePage() {
 		<div className={classes.content}>
 			<div className={classes.settings}>
 				<div className={classes.settings__select}>
-					<Header></Header>
-					{error && <ErrorMessage>Please Fill all the feilds</ErrorMessage>}
+					<Header/>
+					{error && <ErrorMessage> Please Fill all the fields</ErrorMessage>}
 					<input
 						placeholder='User Name'
 						type='text'
