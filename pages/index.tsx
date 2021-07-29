@@ -37,7 +37,6 @@ function HomePage() {
 		<div className={classes.content}>
 			<div className={classes.settings}>
 				<div className={classes.settings__select}>
-					<Header/>
 					{error && <ErrorMessage> Please Fill all the fields</ErrorMessage>}
 					<input
 						placeholder='User Name'
