@@ -5,6 +5,7 @@ import QuizContext from "../../store/quiz-context";
 import { useRouter } from "next/router";
 import Button from '@material-ui/core/Button';
 import NavigationIcon from '@material-ui/icons/Navigation';
+import RotateRightIcon from '@material-ui/icons/RotateRight'
 
 
 const ResultPage = () => {
@@ -23,7 +24,7 @@ const ResultPage = () => {
          variant="contained"
         color="primary"
 		size="large"
-        startIcon={<NavigationIcon />}
+        startIcon={<RotateRightIcon />}
       >
         Start Again
       </Button>

@@ -128,7 +128,16 @@ function HomePage() {
 						<option key='Medium' value='medium'>Medium</option>
 						<option key='Hard' value='hard'>Hard</option>
 					</NativeSelect>
-<div style={{display:'flex' , justifyContent:'space-between'}} >
+					<div style={{display:'flex' , justifyContent:'space-between'}} >
+						<Button
+							variant="contained"
+							color="secondary"
+							className={classes.button}
+							onClick={handleReset}
+							endIcon={<RotateRightIcon/>}
+						>
+							Reset
+						</Button>
 					<Button
 						variant="contained"
 						color="primary"
@@ -138,14 +147,7 @@ function HomePage() {
 					>
 						Start Quiz
 					</Button>
-					<Button
-						variant="contained"
-						color="primary"
-						className={classes.button}
-						onClick={handleReset}
-					>
-						<RotateRightIcon/>
-					</Button>
+
 </div>
 				</div>
 			</div>
