@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import QuizContext from "../../store/quiz-context";
 import { useQuery } from "react-query";
 import { getQuestions } from "../../services/trivia";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const QuizPage = () => {
 	const ctx = useContext(QuizContext);
@@ -44,9 +45,9 @@ const QuizPage = () => {
 		return choices.sort(() => Math.random() - 0.5);
 	};
 
-	if (isLoading) {
-		return <h4>Loading</h4>;
-	}
+	// if (isLoading) {
+	// 	return <CircularProgress color="secondary" size={100}/> ;
+	// }
 
 	return (
 		<div className={classes.quiz}>
@@ -74,7 +75,7 @@ const QuizPage = () => {
 					/>
 				</Fragment>
 			) : (
-				<div>Loading!!!</div>
+				<CircularProgress color="secondary" size={80}/>
 			)}
 		</div>
 	);

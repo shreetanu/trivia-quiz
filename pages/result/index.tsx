@@ -3,6 +3,10 @@ import { useContext } from "react";
 import classes from "../../styles/result.module.css";
 import QuizContext from "../../store/quiz-context";
 import { useRouter } from "next/router";
+import Button from '@material-ui/core/Button';
+import NavigationIcon from '@material-ui/icons/Navigation';
+
+
 const ResultPage = () => {
 	const ctx = useContext(QuizContext);
 	const router = useRouter();
@@ -13,11 +17,16 @@ const ResultPage = () => {
 	}
 	return (
 		<div className={classes.result}>
-			<h2 className='title'>Your final score is : {ctx.score}</h2>
+			<h1 className='title'>Your final score is : {ctx.score}</h1>
 			<Link href='/' passHref={true}>
-				<button className={classes.button} onClick={() => ctx.resetDetails()}>
-					Start Again
-				</button>
+			<Button
+         variant="contained"
+        color="primary"
+		size="large"
+        startIcon={<NavigationIcon />}
+      >
+        Start Again
+      </Button>
 			</Link>
 		</div>
 	);
