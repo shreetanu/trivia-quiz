@@ -1,9 +1,20 @@
+
 .content {
+
 	display: flex;
+	height: 500px;
+
+}
+.button {
+
+	width: 40%;
+
+	border-radius: 7px;
+
 }
 
 .settings {
-	width: 45%;
+	width: 50%;
 	padding: 10px;
 	display: flex;
 	flex-direction: column;
@@ -11,31 +22,8 @@
 	font-family: "Poppins", sans-serif;
 	font-weight: 300;
 }
-.elements {
-	font-family: inherit;
-	width: 100%;
-	border: 0;
-	border-bottom: 2px solid gray;
-	outline: 0;
-	font-size: 1.3rem;
-	color: black;
-	padding: 7px 0;
-	background: transparent;
-}
-.button {
-	font-family: inherit;
-	width: 40%;
-	border: 0;
-	border: 2px solid gray;
-	border-radius: 7px;
-	outline: 0;
-	font-size: 1.3rem;
-	color: black;
-	padding: 7px 0;
-	background: transparent;
-}
 .banner {
-	width: 55%;
+	width: 50%;
 	align-self: center;
 
 	margin-top: 100px;
@@ -54,6 +42,13 @@
 	}
 	.settings {
 		width: 100%;
+	}
+	.button {
+
+		width: 40%;
+		margin-top: 5px;
+		border-radius: 7px;
+
 	}
 }
 
