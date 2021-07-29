@@ -3,6 +3,8 @@ import React, { useState, useContext } from "react";
 import styles from "./question.module.css";
 import QuizContext from "../../store/quiz-context";
 import { IQuestion } from "../../services/interface";
+import { Box, Button, Container, Typography } from "@material-ui/core";
+import ErrorMessage from "../ErrorMessage";
 
 const decoder = text => {
 	const parser = new DOMParser();
@@ -15,7 +17,7 @@ const decoder = text => {
 
 interface IQuestionProps {
 	currQues: number;
-	setCurrQues: (a:number) => void;
+	setCurrQues: (a: number) => void;
 	questions: IQuestion[];
 	options: string[];
 	correct: string;
@@ -32,13 +34,13 @@ function Question({
 	const [selected, setSelected] = useState("");
 	const [error, setError] = useState("");
 
-	const handleSelect = i => {
-		if ((selected === i && selected === correct) || i == correct)
+	const handleSelect = (i: string) => {
+		if ((selected === i && selected === correct) || i === correct)
 			return "select";
-		else return "wrong";
+		else if (selected === i && selected !== correct) return "wrong";
 	};
 
-	const handleCheck = i => {
+	const handleCheck = (i: React.SetStateAction<string>) => {
 		setSelected(i);
 		if (i === correct) ctx.updateScore();
 		setError("");
@@ -58,13 +60,15 @@ function Question({
 	};
 
 	return (
-		<div className={styles.question}>
-			<h1>Question {currQues + 1}</h1>
-			<div className={styles.singleQuestion}>
-				<h2>{decoder(questions[currQues].question)}</h2>
-				<div className={styles.optionsWrapper}>
-					{error && <p className={styles.error}>{error}</p>}
-					<div className={styles.options}>
+		<Container fixed>
+			<Typography style={{ textAlign: 'center' }} variant='h2'>Question {currQues + 1}</Typography>
+			<Box className={styles.singleQuestion}>
+				<Typography variant='h5'>
+					{decoder(questions[currQues].question)}
+				</Typography>
+				<Box className={styles.optionsWrapper}>
+					{error && <ErrorMessage>{error}</ErrorMessage>}
+					<Box className={styles.options}>
 						{options &&
 							options.map(option => (
 								<button
@@ -77,16 +81,26 @@ function Question({
 									{decoder(option)}
 								</button>
 							))}
-					</div>
-				</div>
-				<div className={styles.controls}>
-					<button onClick={handleQuit}>Quit</button>
-					<button onClick={handleNext}>
+					</Box>
+				</Box>
+				<Box className={styles.controls}>
+					<Button
+						variant='outlined'
+						color='secondary'
+						size='large'
+						onClick={handleQuit}>
+						Quit
+					</Button>
+					<Button
+						variant='contained'
+						color='primary'
+						size='large'
+						onClick={handleNext}>
 						{currQues >= 14 ? "Submit" : "Next Question"}
-					</button>
-				</div>
-			</div>
-		</div>
+					</Button>
+				</Box>
+			</Box>
+		</Container>
 	);
 }
 
