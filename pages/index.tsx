@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useReducer } from "react";
 import { useRouter } from "next/router";
 import ErrorMessage from "../components/ErrorMessage";
 import React from 'react';
@@ -17,6 +17,22 @@ import QuizContext from "../store/quiz-context";
 import classes from '../styles/index.module.css'
 import RotateRightIcon from '@material-ui/icons/RotateRight'
 
+const initialState = {error: false, message: ""};
+
+function reducer(state, action) {
+	switch (action.type) {
+		case 'username error':
+			return {error: true, message: "Please Fill Your User Name"};
+		case 'password error':
+			return {error: true, message: "Please Fill Your Password"};
+		case 'difficulty error':
+			return {error: true, message: "Please Select Difficulty Level"};
+		case 'wrong password error':
+			return {error: true, message: "The Password you have entered is wrong"};
+		case 'no error':
+			return {error: false, message: ""};
+	}
+}
 
 function HomePage() {
 	interface State {
@@ -26,7 +42,9 @@ function HomePage() {
 
 	const ctx = useContext(QuizContext);
 	const [difficulty, setDifficulty] = useState("");
-	const [error, setError] = useState(false);
+
+	const [state, dispatch] = useReducer(reducer, initialState);
+	//const [error, setError] = useState(false);
 	const handleChange = (text: string) => {
 
 		if (text) {
@@ -54,34 +72,30 @@ function HomePage() {
 
 		});
 		ctx.updateUserName("");
-
 	}
 	const handleSubmit = () => {
-		if (!difficulty || !ctx.userName || difficulty === "select" || !values.password) {
-			setError(true);
-			return;
-		} else {
-
-			setError(false);
-			//for test
-			if( values.password!== "Trivia")
-			{
-
-			}
-			else{
+		if (!ctx.userName)
+			dispatch({type: 'username error'});
+		else if(!values.password)
+			dispatch({type: 'password error'})
+		else if(!difficulty)
+			dispatch({type: 'difficulty error'})
+		else if(values.password!== "Trivia")
+			dispatch({type: 'wrong password error'});
+		else {
+			dispatch({type: 'no error'});
 			router.push({
 				pathname: "/quiz",
 				query: { type: difficulty },
 			});
-		}}
+		}
 	};
 	return (
 		<>
-
 		<div className={classes.content}>
 			<div className={classes.settings}>
 				<div className={classes.settings__select}>
-					{error && <ErrorMessage> Please Fill all the fields</ErrorMessage>}
+					{state.error && <ErrorMessage>{state.message}</ErrorMessage>}
 					<Input
 						placeholder='User Name'
 						id='name'
@@ -120,7 +134,7 @@ function HomePage() {
 						value={difficulty}
 						onChange={(event) => setDifficulty(event.target.value)}
 						inputProps={{ 'aria-label': 'age' }}>
-						<ShowChartIcon/>
+						{/*<ShowChartIcon/>*/}
 						<option value="" disabled>
 							Difficulty
 						</option>
@@ -158,10 +172,8 @@ function HomePage() {
 					height={480}
 					alt='Person alongside board'
 				/>
-
 			</div>
 		</div>
-
 		</>
 	);
 }

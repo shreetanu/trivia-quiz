@@ -10,20 +10,21 @@ import {Link} from "@material-ui/core";
 
 export default function Header() {
     return (
-        <div className={styles.root}>
+
             <AppBar position="static">
-                <Toolbar>
+                <Toolbar >
                     <Link href='/' >
+                        <div style={{ display: "flex", justifyContent: 'flex-start', alignItems: 'center'}}>
                         <IconButton edge="start"   aria-label="menu">
                             <QuestionAnswerIcon style={{color:'white'}}/>
                         </IconButton>
+                        <Typography variant="h6"  style={{color:'white'}}>
+                            Trivia Quiz
+                        </Typography>
+                        </div>
                     </Link>
-                    <Typography variant="h6" className={styles.title}>
-                        Trivia Quiz
-                    </Typography>
-                    <Button color="inherit">Login</Button>
                 </Toolbar>
             </AppBar>
-        </div>
+
     );
 }

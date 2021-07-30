@@ -1,4 +1,4 @@
-import axios from "axios";
+
 import { Fragment, useState, useEffect, useContext } from "react";
 import classes from "../../styles/quiz.module.css";
 import Question from "../../components/question/question";
@@ -27,7 +27,7 @@ const QuizPage = () => {
 		data: questions = [],
 		isLoading,
 		isFetching,
-	} = useQuery("questions", () => getQuestions(type as string));
+	} = useQuery("questions", () => getQuestions(type as string), { refetchOnWindowFocus: false });
 
 	useEffect(() => {
 		setOptions(
