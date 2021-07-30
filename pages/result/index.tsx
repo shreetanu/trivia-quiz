@@ -25,6 +25,7 @@ const ResultPage = () => {
         color="primary"
 		size="large"
         startIcon={<RotateRightIcon />}
+		 onClick = {()=> ctx.resetDetails()}
       >
         Start Again
       </Button>
