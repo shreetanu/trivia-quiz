@@ -4,20 +4,23 @@ import {QueryClient, QueryClientProvider} from "react-query";
 import { ReactQueryDevtools } from 'react-query/devtools'
 import type { AppProps} from 'next/app'
 import React from "react";
-import Footer from "../components/Footer";
 import Header from '../components/Header'
+import Head from 'next/head';
 
 function MyApp({ Component, pageProps }:AppProps) {
 
 	const queryClient = new QueryClient();
-	return <QueryClientProvider client={queryClient}>
+	return <>
+		<Head>
+			<title> Trivia Quiz </title>
+		</Head>
+		<QueryClientProvider client={queryClient}>
 			<Header />
 			<QuizContextProvider>
-
 				<Component {...pageProps} />
-				<Footer/>
 			</QuizContextProvider>
-			</QueryClientProvider>;
+			</QueryClientProvider>
+	</>
 }
 export default MyApp;
 
